@@ -10,13 +10,21 @@ export default function ParticlesBackground() {
 
   const particlesLoaded = useCallback(
     async (container?: Container) => {
-      await console.log(container);
+      console.log(container);
     },
     []
   );
 
   return (
-    <div id="particles-background" className="particles-container">
+    <div
+      id="particles-background"
+      className="
+        fixed top-0 left-0 w-full h-full 
+        bg-gradient-to-br from-black via-[#0a0515] to-black 
+        bg-no-repeat bg-cover bg-center 
+        -z-10
+      "
+    >
       <Particles
         id="tsparticles"
         init={particlesInit}
@@ -24,7 +32,7 @@ export default function ParticlesBackground() {
         options={{
           background: {
             color: {
-              value: "transparent", // Fondo transparente para que se vea el gradiente
+              value: "transparent", // Fondo transparente para ver el gradiente
             },
           },
           fpsLimit: 120,
