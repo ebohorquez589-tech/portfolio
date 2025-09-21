@@ -76,7 +76,7 @@ export default function ParticlesBackground() {
                 default: "out",
               },
               random: false,
-              speed: 0.5,
+              speed: 0.3,
               straight: false,
             },
             number: {
