@@ -1,6 +1,6 @@
 
 import { FaDownload } from "react-icons/fa";
-import { GrView } from "react-icons/gr";
+import { FaLaptopCode } from "react-icons/fa";
 
 
 export default function Home() {
@@ -13,19 +13,18 @@ export default function Home() {
               <img src="eduardo.png" alt="" className="bottom-15 relative w-[400px]  " />
             </div>
             <div className="flex flex-col gap-2">
-              <h2 className="text-3xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-4xl font-bold">Desarrollador <span className="text-purple-600 [text-shadow:0_0_20px_rgba(142,68,173,0.4)]">Fullstack Web</span> </h2>
+              
               <h3 className="text-2xl sm:text-2xl md:text-2xl lg:text-2xl xl:text-2xl font-medium">Eduardo Deossa Bohorquez</h3>
+              <h2 className="text-3xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-4xl font-bold">Desarrollador <span className="text-purple-600 [text-shadow:0_0_20px_rgba(142,68,173,0.4)]">Fullstack Web</span> </h2>
               <p className="max-w-[720px] text-lg sm:text-lg md:text-lg lg:text-lg xl:text-lg text-balance text-white">Cuento con la capacidad de construir una página web desde cero, desarrollando tanto el frontend como el backend. En cuanto al diseño, puedo implementar sitios idénticos a los diseños entregados, ya sea que se hallan echo en Figma u otras herramientas gráficas.</p>
 
               <div className="flex gap-5">
-                <button className="bg-purple-700 px-[25px] text-lg mt-[10px] p-[4px] rounded-2xl cursor-pointer font-medium flex justify-center items-center gap-2 shadow-[0_0_6px_#9333ea]"><span >CV</span> <FaDownload className="text-lg" />
+                <button className="bg-purple-700  mt-[10px] cursor-pointer shadow-[0_0_6px_#9333ea] px-5 py-3 text-lg rounded-xl font-semibold flex justify-center items-center gap-3  hover:shadow-[0_0_25px_rgba(147,51,234,0.6)] transition-all duration-300 tracking-wide"><span >CV</span> <FaDownload className="text-lg" />
                 </button>
-                <button className="bg-blue-700 px-[25px] text-lg mt-[10px] p-[4px] rounded-2xl cursor-pointer font-medium flex justify-center items-center gap-2 shadow-[0_0_6px_#3b82f6]"><span >Proyectos</span>
-                <GrView className="text-lg" />
+                <button className="bg-indigo-700 shadow-[0_0_6px_#3b82f6] mt-[10px] cursor-pointer px-5 py-3 text-lg rounded-xl font-semibold flex justify-center items-center gap-3 transition-all duration-300 tracking-wide  hover:shadow-[0_0_25px_rgba(59,130,246,0.6)]"><span >Proyectos</span>
+                <FaLaptopCode className="text-lg" />
                 </button>
               </div>
-
-
             </div>
           </div>
         </article>
