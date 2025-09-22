@@ -18,7 +18,7 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed top-0 w-full h-[80px] flex justify-center items-center z-50 transition-all duration-200
-         ${scrolled ? "bg-black/90 backdrop-blur-[80px] shadow-[0_0_5px_rgba(68,92,173,0.1),0_0_20px_rgba(33,23,168,1)]" : ""}
+         ${scrolled ? "bg-black/90 backdrop-blur-[80px] shadow-[0_0_5px_#9333ea]" : ""}
       `}
     >
       <div className="w-[95%] flex justify-between items-center">

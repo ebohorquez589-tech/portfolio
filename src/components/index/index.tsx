@@ -1,5 +1,7 @@
 
 import { FaDownload, FaLaptopCode } from "react-icons/fa";
+import Carousel from "./carousel"; // 👈 Ajusta la ruta según tu estructura
+
 export default function Home() {
   return (
     <div className="mt-[80px] text-white">
@@ -18,7 +20,7 @@ export default function Home() {
               <div className="flex gap-5">
                 <button className="bg-purple-700  mt-[10px] cursor-pointer shadow-[0_0_6px_#9333ea] px-5 py-3 text-lg rounded-xl font-semibold flex justify-center items-center gap-3  hover:shadow-[0_0_25px_rgba(147,51,234,0.6)] transition-all duration-300 tracking-wide"><span >CV</span> <FaDownload className="text-lg" />
                 </button>
-                <button className="bg-indigo-700 shadow-[0_0_6px_#4338ca] mt-[10px] cursor-pointer px-5 py-3 text-lg rounded-xl font-semibold flex justify-center items-center gap-3 transition-all duration-300 tracking-wide  hover:shadow-[0_0_25px_rgba(59,130,246,0.6)]"><span >Proyectos</span>
+                <button className="bg-indigo-700 shadow-[0_0_6px_#4338ca] mt-[10px] cursor-pointer px-5 py-3 text-lg rounded-xl font-semibold flex justify-center items-center gap-3 transition-all duration-300 tracking-wide hover:shadow-[0_0_25px_rgba(59,130,246,0.6)]"><span >Proyectos</span>
                   <FaLaptopCode className="text-lg" />
                 </button>
               </div>
@@ -27,10 +29,10 @@ export default function Home() {
         </article>
       </header>
       <main>
-        <article className="m-auto w-[80%] mt-[80px]">
+        <article className="m-auto w-[80%] mt-[140px]">
           <h2 className="text-white font-bold text-center text-3xl">Proyectos destacados</h2>
           <hr className="w-24 border-t-4 shadow-[0_0_20px_#8e44ad] border-purple-600 mx-auto mt-2" />
-
+          <Carousel />
         </article>
       </main>
     </div>
