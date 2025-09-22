@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ExternalLink, Github } from 'lucide-react';
 
 interface Project {
   id: number;
@@ -7,6 +7,7 @@ interface Project {
   description: string;
   image: string;
   technologies: string[];
+  category: string;
 }
 
 const ProjectCarousel: React.FC = () => {
@@ -14,49 +15,55 @@ const ProjectCarousel: React.FC = () => {
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const intervalRef = useRef<number | null>(null);
 
-  // Datos de ejemplo para los proyectos
+  // Datos de ejemplo con imágenes de páginas web reales
   const projects: Project[] = [
     {
       id: 1,
-      title: "E-commerce Platform",
-      description: "Plataforma completa de comercio electrónico con carrito de compras, pagos y gestión de inventario.",
-      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=250&fit=crop",
-      technologies: ["React.js", "Node.js", "MongoDB", "Express"]
+      title: "Netflix Clone",
+      description: "Replica completa de Netflix con streaming de video, perfiles de usuario y sistema de recomendaciones.",
+      image: "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=600&h=400&fit=crop",
+      technologies: ["React", "Node.js", "MongoDB", "Firebase"],
+      category: "Streaming Platform"
     },
     {
       id: 2,
-      title: "Task Management App",
-      description: "Aplicación de gestión de tareas con colaboración en tiempo real y notificaciones.",
-      image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=250&fit=crop",
-      technologies: ["React.js", "TypeScript", "Socket.io", "PostgreSQL"]
+      title: "Spotify Dashboard",
+      description: "Dashboard interactivo para análisis musical con visualizaciones de datos y playlists personalizadas.",
+      image: "https://images.unsplash.com/photo-1611339555312-e607c8352fd7?w=600&h=400&fit=crop",
+      technologies: ["Next.js", "TypeScript", "Spotify API", "Chart.js"],
+      category: "Music Analytics"
     },
     {
       id: 3,
-      title: "Social Media Dashboard",
-      description: "Dashboard analítico para redes sociales con métricas en tiempo real y reportes.",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop",
-      technologies: ["Vue.js", "Node.js", "Redis", "Chart.js"]
+      title: "E-Banking App",
+      description: "Aplicación bancaria moderna con transferencias, análisis de gastos y gestión de tarjetas.",
+      image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&h=400&fit=crop",
+      technologies: ["React Native", "Node.js", "PostgreSQL", "Stripe"],
+      category: "Fintech"
     },
     {
       id: 4,
-      title: "Learning Management System",
-      description: "Sistema de gestión de aprendizaje con cursos, evaluaciones y seguimiento de progreso.",
-      image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=400&h=250&fit=crop",
-      technologies: ["React.js", "Python", "Django", "MySQL"]
+      title: "Social Media Platform",
+      description: "Red social completa con posts, stories, mensajería en tiempo real y sistema de notificaciones.",
+      image: "https://images.unsplash.com/photo-1611605698323-b1e99cfd37ea?w=600&h=400&fit=crop",
+      technologies: ["Vue.js", "Socket.io", "Redis", "AWS"],
+      category: "Social Network"
     },
     {
       id: 5,
-      title: "Weather Forecast App",
-      description: "Aplicación del clima con pronósticos detallados, mapas interactivos y alertas.",
-      image: "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=400&h=250&fit=crop",
-      technologies: ["Next.js", "API REST", "Tailwind", "Vercel"]
+      title: "AI SaaS Platform",
+      description: "Plataforma SaaS con inteligencia artificial para automatización de procesos empresariales.",
+      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop",
+      technologies: ["Python", "TensorFlow", "FastAPI", "Docker"],
+      category: "AI/ML"
     },
     {
       id: 6,
-      title: "Crypto Portfolio Tracker",
-      description: "Rastreador de portafolio de criptomonedas con análisis de mercado y alertas de precios.",
-      image: "https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=400&h=250&fit=crop",
-      technologies: ["React.js", "Web3", "Node.js", "MongoDB"]
+      title: "Crypto Exchange",
+      description: "Exchange de criptomonedas con trading en tiempo real, wallets y análisis de mercado.",
+      image: "https://images.unsplash.com/photo-1640340434855-6084b1f4901c?w=600&h=400&fit=crop",
+      technologies: ["React", "Web3", "Solidity", "GraphQL"],
+      category: "Blockchain"
     }
   ];
 
@@ -64,10 +71,10 @@ const ProjectCarousel: React.FC = () => {
   useEffect(() => {
     if (isAutoPlaying) {
       intervalRef.current = setInterval(() => {
-        setCurrentIndex((prevIndex) => 
+        setCurrentIndex((prevIndex) =>
           prevIndex === projects.length - 1 ? 0 : prevIndex + 1
         );
-      }, 6000);
+      }, 4000);
     }
 
     return () => {
@@ -80,62 +87,61 @@ const ProjectCarousel: React.FC = () => {
   const goToPrevious = () => {
     setIsAutoPlaying(false);
     setCurrentIndex(currentIndex === 0 ? projects.length - 1 : currentIndex - 1);
-    // Reanudar auto-play después de 5 segundos
     setTimeout(() => setIsAutoPlaying(true), 5000);
   };
 
   const goToNext = () => {
     setIsAutoPlaying(false);
     setCurrentIndex(currentIndex === projects.length - 1 ? 0 : currentIndex + 1);
-    // Reanudar auto-play después de 5 segundos
     setTimeout(() => setIsAutoPlaying(true), 5000);
   };
 
   const getTechColor = (tech: string): string => {
     const colors: { [key: string]: string } = {
-      'React.js': 'bg-purple-600 shadow-[0_0_8px_rgba(147,51,234,0.4)]',
-      'Node.js': 'bg-indigo-600 shadow-[0_0_8px_rgba(79,70,229,0.4)]',
-      'MongoDB': 'bg-violet-600 shadow-[0_0_8px_rgba(139,92,246,0.4)]',
-      'Express': 'bg-purple-700 shadow-[0_0_8px_rgba(126,34,206,0.4)]',
-      'TypeScript': 'bg-indigo-700 shadow-[0_0_8px_rgba(67,56,202,0.4)]',
-      'Socket.io': 'bg-violet-700 shadow-[0_0_8px_rgba(109,40,217,0.4)]',
-      'PostgreSQL': 'bg-purple-800 shadow-[0_0_8px_rgba(107,33,168,0.4)]',
-      'Vue.js': 'bg-indigo-500 shadow-[0_0_8px_rgba(99,102,241,0.4)]',
-      'Redis': 'bg-violet-500 shadow-[0_0_8px_rgba(139,92,246,0.4)]',
-      'Chart.js': 'bg-purple-500 shadow-[0_0_8px_rgba(168,85,247,0.4)]',
-      'Python': 'bg-indigo-800 shadow-[0_0_8px_rgba(55,48,163,0.4)]',
-      'Django': 'bg-violet-800 shadow-[0_0_8px_rgba(91,33,182,0.4)]',
-      'MySQL': 'bg-purple-900 shadow-[0_0_8px_rgba(88,28,135,0.4)]',
-      'Next.js': 'bg-indigo-900 shadow-[0_0_8px_rgba(49,46,129,0.4)]',
-      'API REST': 'bg-violet-900 shadow-[0_0_8px_rgba(76,29,149,0.4)]',
-      'Tailwind': 'bg-purple-400 shadow-[0_0_8px_rgba(196,181,253,0.4)]',
-      'Vercel': 'bg-indigo-950 shadow-[0_0_8px_rgba(30,27,75,0.4)]',
-      'Web3': 'bg-violet-950 shadow-[0_0_8px_rgba(46,16,101,0.4)]'
+      'React': 'bg-gradient-to-r from-cyan-400 to-blue-500 text-white',
+      'Node.js': 'bg-gradient-to-r from-green-400 to-emerald-500 text-white',
+      'MongoDB': 'bg-gradient-to-r from-green-500 to-green-600 text-white',
+      'Firebase': 'bg-gradient-to-r from-yellow-400 to-orange-500 text-white',
+      'Next.js': 'bg-gradient-to-r from-gray-800 to-gray-900 text-white',
+      'TypeScript': 'bg-gradient-to-r from-blue-500 to-blue-600 text-white',
+      'Spotify API': 'bg-gradient-to-r from-green-500 to-green-400 text-white',
+      'Chart.js': 'bg-gradient-to-r from-pink-400 to-red-500 text-white',
+      'React Native': 'bg-gradient-to-r from-blue-400 to-cyan-500 text-white',
+      'PostgreSQL': 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white',
+      'Stripe': 'bg-gradient-to-r from-indigo-500 to-purple-600 text-white',
+      'Vue.js': 'bg-gradient-to-r from-emerald-400 to-green-500 text-white',
+      'Socket.io': 'bg-gradient-to-r from-purple-500 to-indigo-600 text-white',
+      'Redis': 'bg-gradient-to-r from-red-500 to-pink-500 text-white',
+      'AWS': 'bg-gradient-to-r from-orange-400 to-yellow-500 text-white',
+      'Python': 'bg-gradient-to-r from-blue-500 to-yellow-400 text-white',
+      'TensorFlow': 'bg-gradient-to-r from-orange-500 to-red-500 text-white',
+      'FastAPI': 'bg-gradient-to-r from-teal-400 to-green-500 text-white',
+      'Docker': 'bg-gradient-to-r from-blue-400 to-blue-600 text-white',
+      'Web3': 'bg-gradient-to-r from-purple-600 to-pink-600 text-white',
+      'Solidity': 'bg-gradient-to-r from-gray-600 to-gray-800 text-white',
+      'GraphQL': 'bg-gradient-to-r from-pink-500 to-purple-600 text-white'
     };
-    return colors[tech] || 'bg-purple-600 shadow-[0_0_8px_rgba(147,51,234,0.4)]';
+    return colors[tech] || 'bg-gradient-to-r from-gray-400 to-gray-600 text-white';
   };
 
-
-
   return (
-    <div className="w-full max-w-7xl mx-auto px-4 py-8 bg-transparent">
+    <div className="w-full max-w-7xl mx-auto px-6 py-12">
       <div className="relative">
-        {/* Botón Previous */}
+        {/* Botones de navegación con glassmorphism */}
         <button
           onClick={goToPrevious}
-          className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-indigo-600 rounded-full p-3 hover:bg-indigo-700 shadow-[0_0_6px_#4338ca] hover:shadow-[0_0_10px_rgba(59,130,246,0.6)] transition-all duration-300"
+          className="absolute left-[-20px] top-1/2 transform -translate-y-1/2 z-10 backdrop-blur-md bg-white/10 border border-white/20 rounded-full p-4 hover:bg-white/20 transition-all duration-300 shadow-lg hover:shadow-xl"
           aria-label="Proyecto anterior"
         >
-          <ChevronLeft className="w-6 h-6 text-white" />
+          <ChevronLeft className="w-6 h-6 text-white drop-shadow-lg" />
         </button>
 
-        {/* Contenedor del carousel */}
-        <div className="overflow-hidden mx-16">
-          <div 
-            className="flex transition-transform duration-500 ease-in-out gap-8"
+        {/* Contenedor principal del carousel */}
+        <div className="overflow-hidden rounded-2xl">
+          <div
+            className="flex transition-transform duration-700 ease-out gap-8"
             style={{ transform: `translateX(-${currentIndex * (100 / 3)}%)` }}
           >
-            {/* Crear array extendido para mostrar siempre 3 elementos completos */}
             {Array.from({ length: projects.length + 2 }, (_, index) => {
               const projectIndex = index % projects.length;
               const project = projects[projectIndex];
@@ -144,56 +150,81 @@ const ProjectCarousel: React.FC = () => {
                   key={`project-${project.id}-${index}`}
                   className="flex-shrink-0 w-1/3 group relative"
                 >
-                  {/* Contenedor de la tarjeta */}
-                  <div className="relative overflow-hidden rounded-xl bg-black/10 backdrop-blur-[80px] shadow-[0_0_2px_#8e44ad]   h-96 cursor-pointer transform hover:scale-105 transition-all duration-300">
-                    {/* Imagen */}
-                    <div className="h-52 overflow-hidden relative">
+                  {/* Card principal */}
+<div className="relative overflow-hidden rounded-2xl backdrop-blur-lg bg-gradient-to-br from-purple-500/10 via-indigo-500/10 to-violet-500/10 border border-purple-400/30 shadow-2xl hover:shadow-purple-500/40 transition-all duration-500 transform hover:-translate-y-2 hover:scale-[1.02]">                    {/* Imagen con overlay gradient */}
+                    <div className="relative h-64 overflow-hidden">
                       <img
                         src={project.image}
                         alt={project.title}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent"></div>
+
+                      {/* Badge de categoría */}
+                      <div className="absolute top-4 left-4 backdrop-blur-sm bg-white/10 border border-white/20 rounded-full px-3 py-1">
+                        <span className="text-xs font-medium text-white/90">{project.category}</span>
+                      </div>
                     </div>
 
                     {/* Contenido visible por defecto */}
-                    <div className="p-5 group-hover:opacity-0 transition-opacity duration-300">
-                      <h3 className="text-xl font-bold text-white mb-3 truncate [text-shadow:0_0_10px_rgba(147,51,234,0.3)]">
+                    <div className="p-6 group-hover:opacity-0 transition-opacity duration-300">
+                      <h3 className="text-2xl font-bold text-white mb-3 bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
                         {project.title}
                       </h3>
+                      <p className="text-slate-400 text-sm mb-4 line-clamp-2">
+                        {project.description}
+                      </p>
                       <div className="flex flex-wrap gap-2">
                         {project.technologies.slice(0, 3).map((tech, techIndex) => (
                           <span
                             key={techIndex}
-                            className={`px-3 py-1 text-xs text-white rounded-full font-medium ${getTechColor(tech)}`}
+                            className={`px-3 py-1 text-xs font-semibold rounded-full ${getTechColor(tech)} shadow-lg`}
                           >
                             {tech}
                           </span>
                         ))}
+                        {project.technologies.length > 3 && (
+                          <span className="px-3 py-1 text-xs font-semibold rounded-full bg-gradient-to-r from-slate-00 to-slate-700 text-white">
+                            +{project.technologies.length - 3}
+                          </span>
+                        )}
                       </div>
                     </div>
 
-                    {/* Overlay que aparece en hover */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-purple-900/95 via-indigo-900/95 to-violet-900/95 opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-center items-center text-white p-6 backdrop-blur-sm">
-                      <h3 className="text-2xl font-bold mb-4 text-center [text-shadow:0_0_15px_rgba(147,51,234,0.5)]">
-                        {project.title}
-                      </h3>
-                      <p className="text-sm text-gray-200 text-center mb-6 line-clamp-3 leading-relaxed">
-                        {project.description}
-                      </p>
-                      <div className="flex flex-wrap gap-2 mb-6 justify-center">
-                        {project.technologies.map((tech, techIndex) => (
-                          <span
-                            key={techIndex}
-                            className={`px-3 py-1 text-xs text-white rounded-full font-medium ${getTechColor(tech)}`}
-                          >
-                            {tech}
-                          </span>
-                        ))}
+                    {/* Overlay completo que aparece en hover */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/95 via-purple-900/95 to-pink-900/95 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-center items-center p-8">
+                      <div className="text-center">
+                        <h3 className="text-3xl font-bold text-white mb-4 bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent">
+                          {project.title}
+                        </h3>
+                        <p className="text-slate-200 mb-6 leading-relaxed text-center max-w-sm">
+                          {project.description}
+                        </p>
+
+                        {/* Tecnologías completas */}
+                        <div className="flex flex-wrap gap-2 mb-8 justify-center">
+                          {project.technologies.map((tech, techIndex) => (
+                            <span
+                              key={techIndex}
+                              className={`px-3 py-1 text-xs font-semibold rounded-full ${getTechColor(tech)} shadow-lg transform hover:scale-105 transition-transform`}
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+
+                        {/* Botones de acción */}
+                        <div className="flex gap-4 justify-center">
+                          <button className="group/btn backdrop-blur-sm bg-white/10 border border-white/20 text-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-slate-900 transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl hover:scale-105">
+                            <ExternalLink className="w-4 h-4" />
+                            <span>Demo</span>
+                          </button>
+                          <button className="group/btn backdrop-blur-sm bg-white/10 border border-white/20 text-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-slate-900 transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl hover:scale-105">
+                            <Github className="w-4 h-4" />
+                            <span>Code</span>
+                          </button>
+                        </div>
                       </div>
-                      <button className="bg-white text-purple-900 px-6 py-3 rounded-full font-bold hover:bg-purple-100 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300 transform hover:scale-105">
-                        Ver más
-                      </button>
                     </div>
                   </div>
                 </div>
@@ -202,18 +233,17 @@ const ProjectCarousel: React.FC = () => {
           </div>
         </div>
 
-        {/* Botón Next */}
         <button
           onClick={goToNext}
-          className="cursor-pointer absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-indigo-600 rounded-full p-3 hover:bg-indigo-700 shadow-[0_0_6px_#4338ca] hover:shadow-[0_0_10px_rgba(59,130,246,0.6)] transition-all duration-300"
+          className="absolute right-[-20px] top-1/2 transform -translate-y-1/2 z-10 backdrop-blur-md bg-white/10 border border-white/20 rounded-full p-4 hover:bg-white/20 transition-all duration-300 shadow-lg hover:shadow-xl"
           aria-label="Siguiente proyecto"
         >
-          <ChevronRight className="w-6 h-6 text-white" />
+          <ChevronRight className="w-6 h-6 text-white drop-shadow-lg" />
         </button>
       </div>
 
-      {/* Indicadores - Todos los proyectos */}
-      <div className="flex justify-center mt-8 space-x-3">
+      {/* Indicadores modernos */}
+      <div className="flex justify-center mt-10 space-x-3">
         {projects.map((_, index) => (
           <button
             key={index}
@@ -222,27 +252,26 @@ const ProjectCarousel: React.FC = () => {
               setIsAutoPlaying(false);
               setTimeout(() => setIsAutoPlaying(true), 5000);
             }}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
-              index === currentIndex 
-                ? 'bg-purple-600 shadow-[0_0_15px_rgba(147,51,234,0.8)] scale-125' 
-                : 'bg-gray-500 hover:bg-purple-400 hover:shadow-[0_0_10px_rgba(147,51,234,0.4)]'
-            }`}
+            className={`transition-all duration-300 rounded-full ${index === currentIndex
+                ? 'w-8 h-3 bg-gradient-to-r from-purple-500 to-pink-500 shadow-lg shadow-purple-500/50'
+                : 'w-3 h-3 bg-slate-600 hover:bg-slate-500 hover:scale-125'
+              }`}
             aria-label={`Ir al proyecto ${index + 1}`}
           />
         ))}
       </div>
 
-      {/* Control de auto-play 
-      <div className="text-center mt-6">
+      {/* Control de reproducción elegante 
+      <div className="text-center mt-8">
         <button
           onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-          className={`text-sm font-medium transition-all duration-300 px-4 py-2 rounded-full ${
+          className={`backdrop-blur-sm bg-white/5 border border-white/10 text-sm font-medium px-6 py-3 rounded-full transition-all duration-300 ${
             isAutoPlaying 
-              ? 'text-purple-400 hover:text-purple-300 hover:shadow-[0_0_10px_rgba(147,51,234,0.3)]' 
-              : 'text-gray-400 hover:text-white hover:shadow-[0_0_10px_rgba(255,255,255,0.2)]'
+              ? 'text-purple-400 hover:bg-purple-500/10 border-purple-500/20' 
+              : 'text-slate-400 hover:bg-slate-500/10 border-slate-500/20'
           }`}
         >
-          {isAutoPlaying ? 'Pausar' : 'Reproducir'} auto-play
+          {isAutoPlaying ? '⏸️ Pausar reproducción' : '▶️ Continuar reproducción'}
         </button>
       </div>
       */}
