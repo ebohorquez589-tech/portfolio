@@ -32,7 +32,7 @@ const Navbar = () => {
               hover:text-purple-600 hover:[text-shadow:0_0_10px_#8e44ad]
               active:text-purple-600 active:[text-shadow:0_0_15px_#8e44ad,0_0_25px_#8e44ad]"
           >
-            Tu Logo
+           Port<span className="text-violet-500">afo</span><span>lio</span>
           </a>
         </div>
 
@@ -43,7 +43,7 @@ const Navbar = () => {
               href="/Home"
               className="text-white text-sm sm:text-base md:text-lg lg:text-xl font-medium no-underline
                 transition-all duration-300
-                hover:text-blue-400 hover:[text-shadow:0_0_8px_#3498db]"
+                hover:text-purple-600 hover:[text-shadow:0_0_8px_#4f46e5]"
             >
               Inicio
             </a>
@@ -53,7 +53,7 @@ const Navbar = () => {
               href="#"
               className="text-white text-sm sm:text-base md:text-lg lg:text-xl font-medium no-underline
                 transition-all duration-300
-                hover:text-blue-400 hover:[text-shadow:0_0_8px_#3498db]"
+                hover:text-purple-600 hover:[text-shadow:0_0_8px_#4f46e5]"
             >
               Servicios
             </a>
@@ -63,7 +63,7 @@ const Navbar = () => {
               href="#"
               className="text-white text-sm sm:text-base md:text-lg lg:text-xl font-medium no-underline
                 transition-all duration-300
-                hover:text-blue-400 hover:[text-shadow:0_0_8px_#3498db]"
+                hover:text-purple-600 hover:[text-shadow:0_0_8px_#4f46e5]"
             >
               Portafolio
             </a>
@@ -73,7 +73,7 @@ const Navbar = () => {
               href="#"
               className="text-white text-sm sm:text-base md:text-lg lg:text-xl font-medium no-underline
                 transition-all duration-300
-                hover:text-blue-400 hover:[text-shadow:0_0_8px_#3498db]"
+                hover:text-purple-600 hover:[text-shadow:0_0_8px_#4f46e5]"
             >
               Contacto
             </a>
