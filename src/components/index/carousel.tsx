@@ -151,7 +151,7 @@ const ProjectCarousel: React.FC = () => {
                   className="flex-shrink-0 w-1/3 group relative"
                 >
                   {/* Card principal */}
-<div className="relative overflow-hidden rounded-2xl backdrop-blur-lg bg-gradient-to-br from-purple-500/10 via-indigo-500/10 to-violet-500/10 border border-purple-400/30 shadow-2xl hover:shadow-purple-500/40 transition-all duration-500 transform hover:-translate-y-2 hover:scale-[1.02]">                    {/* Imagen con overlay gradient */}
+                  <div className="relative overflow-hidden rounded-2xl backdrop-blur-lg bg-gradient-to-br from-purple-500/10 via-indigo-500/10 to-violet-500/10 border border-purple-400/30 shadow-2xl hover:shadow-purple-500/40 transition-all duration-500 transform hover:-translate-y-2 hover:scale-[1.02]">                    {/* Imagen con overlay gradient */}
                     <div className="relative h-64 overflow-hidden">
                       <img
                         src={project.image}
@@ -253,8 +253,8 @@ const ProjectCarousel: React.FC = () => {
               setTimeout(() => setIsAutoPlaying(true), 5000);
             }}
             className={`transition-all duration-300 rounded-full ${index === currentIndex
-                ? 'w-8 h-3 bg-gradient-to-r from-purple-500 to-pink-500 shadow-lg shadow-purple-500/50'
-                : 'w-3 h-3 bg-slate-600 hover:bg-slate-500 hover:scale-125'
+              ? 'w-8 h-3 bg-gradient-to-r from-purple-500 to-pink-500 shadow-lg shadow-purple-500/50'
+              : 'w-3 h-3 bg-slate-600 hover:bg-slate-500 hover:scale-125'
               }`}
             aria-label={`Ir al proyecto ${index + 1}`}
           />
