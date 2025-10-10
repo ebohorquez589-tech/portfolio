@@ -13,16 +13,18 @@ interface Project {
 const ProjectCarousel: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
   const intervalRef = useRef<number | null>(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
 
-  // Datos de ejemplo con imágenes de páginas web reales
+  // Datos de ejemplo
   const projects: Project[] = [
     {
       id: 1,
       title: "Netflix Clone",
       description: "Replica completa de Netflix con streaming de video, perfiles de usuario y sistema de recomendaciones.",
       image: "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=600&h=400&fit=crop",
-      technologies: ["React", "Node.js", "MongoDB", "Firebase"],
+      technologies: ["React", "Node.js", "MongoDB", "Firebase", "Yo solo"],
       category: "Streaming Platform"
     },
     {
@@ -67,33 +69,104 @@ const ProjectCarousel: React.FC = () => {
     }
   ];
 
-  // Auto-play functionality
+  /**
+   * 1. Pausa y Reanudación del Auto-play
+   */
+  const startAutoPlay = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+
+    intervalRef.current = window.setInterval(() => {
+      setCurrentIndex((prevIndex) =>
+        prevIndex === projects.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 6000);
+  };
+
+  const stopAutoPlay = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+  };
+
+  // Efecto para controlar el auto-play
   useEffect(() => {
-    if (isAutoPlaying) {
-      intervalRef.current = setInterval(() => {
-        setCurrentIndex((prevIndex) =>
-          prevIndex === projects.length - 1 ? 0 : prevIndex + 1
-        );
-      }, 4000);
+    if (isAutoPlaying && isVisible) {
+      startAutoPlay();
+    } else {
+      stopAutoPlay();
     }
 
     return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
+      stopAutoPlay();
+    };
+  }, [isAutoPlaying, isVisible, projects.length]);
+
+  /**
+   * 2. Intersection Observer para detectar visibilidad
+   */
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsVisible(entry.isIntersecting);
+        });
+      },
+      {
+        threshold: 0.3,
+        rootMargin: '0px'
+      }
+    );
+
+    if (carouselRef.current) {
+      observer.observe(carouselRef.current);
+    }
+
+    return () => {
+      if (carouselRef.current) {
+        observer.unobserve(carouselRef.current);
       }
     };
-  }, [isAutoPlaying, projects.length]);
+  }, []);
+
+  /**
+   * 3. Manejo de Eventos del Mouse (Hover)
+   */
+  const handleMouseEnter = () => {
+    setIsAutoPlaying(false);
+  };
+
+  const handleMouseLeave = () => {
+    setIsAutoPlaying(true);
+  };
+
+  /**
+   * 4. Manejo de Navegación (Botones y Puntos)
+   */
+  const resetAutoPlayTimer = () => {
+    stopAutoPlay();
+    setIsAutoPlaying(false);
+
+    setTimeout(() => {
+      setIsAutoPlaying(true);
+    }, 6000);
+  };
 
   const goToPrevious = () => {
-    setIsAutoPlaying(false);
     setCurrentIndex(currentIndex === 0 ? projects.length - 1 : currentIndex - 1);
-    setTimeout(() => setIsAutoPlaying(true), 5000);
+    resetAutoPlayTimer();
   };
 
   const goToNext = () => {
-    setIsAutoPlaying(false);
     setCurrentIndex(currentIndex === projects.length - 1 ? 0 : currentIndex + 1);
-    setTimeout(() => setIsAutoPlaying(true), 5000);
+    resetAutoPlayTimer();
+  };
+
+  const goToProject = (index: number) => {
+    setCurrentIndex(index);
+    resetAutoPlayTimer();
   };
 
   const getTechColor = (tech: string): string => {
@@ -119,15 +192,21 @@ const ProjectCarousel: React.FC = () => {
       'Docker': 'bg-gradient-to-r from-blue-400 to-blue-600 text-white',
       'Web3': 'bg-gradient-to-r from-purple-600 to-pink-600 text-white',
       'Solidity': 'bg-gradient-to-r from-gray-600 to-gray-800 text-white',
-      'GraphQL': 'bg-gradient-to-r from-pink-500 to-purple-600 text-white'
+      'GraphQL': 'bg-gradient-to-r from-pink-500 to-purple-600 text-white',
+      'Yo solo': 'bg-gradient-to-r from-yellow-700 to-amber-900 text-white'
     };
     return colors[tech] || 'bg-gradient-to-r from-gray-400 to-gray-600 text-white';
   };
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-6 py-12">
+    <div
+      ref={carouselRef}
+      className="w-full max-w-7xl mx-auto px-6 py-12"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <div className="relative">
-        {/* Botones de navegación con glassmorphism */}
+        {/* Botones de navegación */}
         <button
           onClick={goToPrevious}
           className="absolute left-[-20px] top-1/2 transform -translate-y-1/2 z-10 backdrop-blur-md bg-white/10 border border-white/20 rounded-full p-4 hover:bg-white/20 transition-all duration-300 shadow-lg hover:shadow-xl"
@@ -140,7 +219,7 @@ const ProjectCarousel: React.FC = () => {
         <div className="overflow-hidden rounded-2xl">
           <div
             className="flex transition-transform duration-700 ease-out gap-8"
-            style={{ transform: `translateX(-${currentIndex * (100 / 3)}%)` }}
+            style={{ transform: `translateX(-${currentIndex * (100 / 3)}%) translateZ(0)` }}
           >
             {Array.from({ length: projects.length + 2 }, (_, index) => {
               const projectIndex = index % projects.length;
@@ -151,7 +230,8 @@ const ProjectCarousel: React.FC = () => {
                   className="flex-shrink-0 w-1/3 group relative"
                 >
                   {/* Card principal */}
-                  <div className="relative overflow-hidden rounded-2xl backdrop-blur-lg bg-gradient-to-br from-purple-500/10 via-indigo-500/10 to-violet-500/10 border border-purple-400/30 shadow-2xl hover:shadow-purple-500/40 transition-all duration-500 transform hover:-translate-y-2 hover:scale-[1.02]">                    {/* Imagen con overlay gradient */}
+                  <div className="relative overflow-hidden rounded-2xl backdrop-blur-lg bg-gradient-to-br from-purple-500/10 via-indigo-500/10 to-violet-500/10 border border-purple-400/30 shadow-2xl hover:shadow-purple-500/40 transition-all duration-500 transform hover:-translate-y-2 hover:scale-[1.02]">
+                    {/* Imagen con overlay gradient */}
                     <div className="relative h-64 overflow-hidden">
                       <img
                         src={project.image}
@@ -168,7 +248,7 @@ const ProjectCarousel: React.FC = () => {
 
                     {/* Contenido visible por defecto */}
                     <div className="p-6 group-hover:opacity-0 transition-opacity duration-300">
-                      <h3 className="text-2xl font-bold text-white mb-3 bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
+                      <h3 className="text-2xl font-bold mb-3 bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
                         {project.title}
                       </h3>
                       <p className="text-slate-400 text-sm mb-4 line-clamp-2">
@@ -184,7 +264,7 @@ const ProjectCarousel: React.FC = () => {
                           </span>
                         ))}
                         {project.technologies.length > 3 && (
-                          <span className="px-3 py-1 text-xs font-semibold rounded-full bg-gradient-to-r from-slate-00 to-slate-700 text-white">
+                          <span className="px-3 py-1 text-xs font-semibold rounded-full bg-gradient-to-r from-slate-600 to-slate-700 text-white">
                             +{project.technologies.length - 3}
                           </span>
                         )}
@@ -194,7 +274,7 @@ const ProjectCarousel: React.FC = () => {
                     {/* Overlay completo que aparece en hover */}
                     <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/95 via-purple-900/95 to-pink-900/95 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-center items-center p-8">
                       <div className="text-center">
-                        <h3 className="text-3xl font-bold text-white mb-4 bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent">
+                        <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent">
                           {project.title}
                         </h3>
                         <p className="text-slate-200 mb-6 leading-relaxed text-center max-w-sm">
@@ -247,34 +327,16 @@ const ProjectCarousel: React.FC = () => {
         {projects.map((_, index) => (
           <button
             key={index}
-            onClick={() => {
-              setCurrentIndex(index);
-              setIsAutoPlaying(false);
-              setTimeout(() => setIsAutoPlaying(true), 5000);
-            }}
-            className={`transition-all duration-300 rounded-full ${index === currentIndex
-              ? 'w-8 h-3 bg-gradient-to-r from-purple-500 to-pink-500 shadow-lg shadow-purple-500/50'
-              : 'w-3 h-3 bg-slate-600 hover:bg-slate-500 hover:scale-125'
-              }`}
+            onClick={() => goToProject(index)}
+            className={`transition-all duration-300 rounded-full ${
+              index === currentIndex
+                ? 'w-8 h-3 bg-gradient-to-r from-purple-500 to-pink-500 shadow-lg shadow-purple-500/50'
+                : 'w-3 h-3 bg-slate-600 hover:bg-slate-500 hover:scale-125'
+            }`}
             aria-label={`Ir al proyecto ${index + 1}`}
           />
         ))}
       </div>
-
-      {/* Control de reproducción elegante 
-      <div className="text-center mt-8">
-        <button
-          onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-          className={`backdrop-blur-sm bg-white/5 border border-white/10 text-sm font-medium px-6 py-3 rounded-full transition-all duration-300 ${
-            isAutoPlaying 
-              ? 'text-purple-400 hover:bg-purple-500/10 border-purple-500/20' 
-              : 'text-slate-400 hover:bg-slate-500/10 border-slate-500/20'
-          }`}
-        >
-          {isAutoPlaying ? '⏸️ Pausar reproducción' : '▶️ Continuar reproducción'}
-        </button>
-      </div>
-      */}
     </div>
   );
 };

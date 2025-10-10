@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import ParticlesBackground from "./components/main/ParticlesBackground";
 import "./App.css"; 
 import Home from "./components/index";
-import Navbar from "./components/main/navbar";
+import Navbar from "./components/main/NavBar";
 
 
 function App() {
