@@ -32,13 +32,14 @@ export default function Home() {
 
       <main>
 
-        <article className="m-auto w-[80%] mt-[100px]">
+        <article className="m-auto w-[95%] mt-[100px]">
           <h2 className="text-white font-bold text-center text-3xl">Proyectos destacados</h2>
           <hr className="w-24 border-t-4 shadow-[0_0_20px_#8e44ad] border-purple-600 mx-auto mt-2" />
           <Carousel />
         </article>
+
         <article>
-          
+
         </article>
 
       </main>

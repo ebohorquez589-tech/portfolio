@@ -201,7 +201,7 @@ const ProjectCarousel: React.FC = () => {
   return (
     <div
       ref={carouselRef}
-      className="w-full max-w-7xl mx-auto px-6 py-12"
+      className="w-full max-w-7xl mx-auto my-[10px]"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -209,16 +209,16 @@ const ProjectCarousel: React.FC = () => {
         {/* Botones de navegación */}
         <button
           onClick={goToPrevious}
-          className="absolute left-[-20px] top-1/2 transform -translate-y-1/2 z-10 backdrop-blur-md bg-white/10 border border-white/20 rounded-full p-4 hover:bg-white/20 transition-all duration-300 shadow-lg hover:shadow-xl"
+          className="cursor-pointer absolute left-[-80px] top-1/2 transform -translate-y-1/2 z-10 backdrop-blur-md bg-white/10 border border-white/20 rounded-full p-4 hover:bg-white/20 transition-all duration-300 shadow-lg hover:shadow-xl"
           aria-label="Proyecto anterior"
         >
           <ChevronLeft className="w-6 h-6 text-white drop-shadow-lg" />
         </button>
 
         {/* Contenedor principal del carousel */}
-        <div className="overflow-hidden rounded-2xl">
+        <div className="overflow-x-hidden overflow-y-visible rounded-2xl py-[20px]">
           <div
-            className="flex transition-transform duration-700 ease-out gap-8"
+            className="flex transition-transform duration-700 ease-out gap-8 "
             style={{ transform: `translateX(-${currentIndex * (100 / 3)}%) translateZ(0)` }}
           >
             {Array.from({ length: projects.length + 2 }, (_, index) => {
@@ -230,7 +230,7 @@ const ProjectCarousel: React.FC = () => {
                   className="flex-shrink-0 w-1/3 group relative"
                 >
                   {/* Card principal */}
-                  <div className="relative overflow-hidden rounded-2xl backdrop-blur-lg bg-gradient-to-br from-purple-500/10 via-indigo-500/10 to-violet-500/10 border border-purple-400/30 shadow-2xl hover:shadow-purple-500/40 transition-all duration-500 transform hover:-translate-y-2 hover:scale-[1.02]">
+                  <div className="relative overflow-hidden rounded-2xl backdrop-blur-lg bg-gradient-to-br from-purple-500/10 via-indigo-500/10 to-violet-500/10 border border-purple-400/30 transition-all duration-500 transform hover:-translate-y-2 hover:scale-[1.02]">
                     {/* Imagen con overlay gradient */}
                     <div className="relative h-64 overflow-hidden">
                       <img
@@ -315,7 +315,7 @@ const ProjectCarousel: React.FC = () => {
 
         <button
           onClick={goToNext}
-          className="absolute right-[-20px] top-1/2 transform -translate-y-1/2 z-10 backdrop-blur-md bg-white/10 border border-white/20 rounded-full p-4 hover:bg-white/20 transition-all duration-300 shadow-lg hover:shadow-xl"
+          className="cursor-pointer absolute right-[-80px] top-1/2 transform -translate-y-1/2 z-10 backdrop-blur-md bg-white/10 border border-white/20 rounded-full p-4 hover:bg-white/20 transition-all duration-300 shadow-lg hover:shadow-xl"
           aria-label="Siguiente proyecto"
         >
           <ChevronRight className="w-6 h-6 text-white drop-shadow-lg" />
@@ -323,14 +323,14 @@ const ProjectCarousel: React.FC = () => {
       </div>
 
       {/* Indicadores modernos */}
-      <div className="flex justify-center mt-10 space-x-3">
+      <div className="flex justify-center mt-[10px] space-x-3">
         {projects.map((_, index) => (
           <button
             key={index}
             onClick={() => goToProject(index)}
-            className={`transition-all duration-300 rounded-full ${
+            className={`transition-all duration-300 rounded-full cursor-pointer ${
               index === currentIndex
-                ? 'w-8 h-3 bg-gradient-to-r from-purple-500 to-pink-500 shadow-lg shadow-purple-500/50'
+                ? 'w-8 h-3 bg-gradient-to-r from-purple-600 to-violet-700 shadow-lg shadow-purple-500/45'
                 : 'w-3 h-3 bg-slate-600 hover:bg-slate-500 hover:scale-125'
             }`}
             aria-label={`Ir al proyecto ${index + 1}`}

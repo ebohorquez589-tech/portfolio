@@ -25,8 +25,7 @@ export default function ParticlesBackground() {
         -z-10
       "
     >
-      {
-      /* 
+       
       <Particles
         id="tsparticles"
         init={particlesInit}
@@ -101,8 +100,7 @@ export default function ParticlesBackground() {
           detectRetina: true,
         }}
       />
-      */
-    }
+      
     </div>
   );
 }
