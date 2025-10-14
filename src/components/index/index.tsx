@@ -1,6 +1,6 @@
 
 import { FaDownload, FaLaptopCode } from "react-icons/fa";
-import Carousel from "./carousel"; // 👈 Ajusta la ruta según tu estructura
+import Carousel from "../carousel/carousel"; 
 
 export default function Home() {
   return (
@@ -32,7 +32,7 @@ export default function Home() {
 
       <main>
 
-        <article className="m-auto w-[95%] mt-[100px]">
+        <article className="m-auto w-[95%] mt-[100px] mb-[50px]">
           <h2 className="text-white font-bold text-center text-3xl">Proyectos destacados</h2>
           <hr className="w-24 border-t-4 shadow-[0_0_20px_#8e44ad] border-purple-600 mx-auto mt-2" />
           <Carousel />
