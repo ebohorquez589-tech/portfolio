@@ -90,7 +90,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
       {/* Overlay completo que aparece en hover (solo desktop) */}
       <div className="hidden lg:flex absolute inset-0 bg-gradient-to-br from-indigo-900/95 via-indigo-900/0 to-indigo-900/95 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-500 flex-col justify-center items-center p-6 xl:p-8">
         <div className="text-center">
-          <h3 className="text-2xl xl:text-3xl font-bold mb-3 xl:mb-4 bg-gradient-to-r text-white bg-clip-text text-transparent">
+          <h3 className="text-2xl xl:text-3xl font-bold mb-3 xl:mb-4 bg-gradient-to-r text-white bg-clip-text">
             {project.title}
           </h3>
           <p className="text-slate-100 font-medium mb-4 xl:mb-6 leading-relaxed text-sm xl:text-base max-w-sm">

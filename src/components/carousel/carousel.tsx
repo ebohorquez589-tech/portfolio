@@ -149,7 +149,7 @@ const ProjectCarousel: React.FC = () => {
         {/* Contenedor principal del carousel */}
         <div className="overflow-hidden rounded-2xl">
           <div
-            className="flex transition-transform duration-500 ease-out gap-4 sm:gap-6 lg:gap-8 py-4"
+            className="flex transition-transform duration-500 ease-out gap-4 sm:gap-6 lg:gap-8"
             style={{ 
               transform: `translateX(-${currentIndex * (100 / slidesToShow)}%)`,
               willChange: 'transform'

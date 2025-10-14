@@ -4,10 +4,10 @@ import Carousel from "../carousel/carousel";
 
 export default function Home() {
   return (
-    <div className="mt-[80px] text-white">
+    <div className=" text-white">
       
-      <header className="w-full">
-        <article className="w-[95%] m-auto pt-[60px]">
+      <header className="w-full h-screen flex items-center">
+        <article className="w-[95%] m-auto ">
           <div className="flex gap-20 items-center w-[80%] m-auto">
             <div className="w-[450px] h-[450px] bg-violet-950 rounded-full border-4 border-purple-600 shadow-[0_0_20px_#8e44ad] flex justify-center items-center  ">
               <img src="eduardo.png" alt="" className="bottom-15 relative w-[400px]  " />
@@ -32,14 +32,22 @@ export default function Home() {
 
       <main>
 
-        <article className="m-auto w-[95%] mt-[100px] mb-[50px]">
+        <article className="m-auto w-[95%]  mb-[50px]">
           <h2 className="text-white font-bold text-center text-3xl">Proyectos destacados</h2>
           <hr className="w-24 border-t-4 shadow-[0_0_20px_#8e44ad] border-purple-600 mx-auto mt-2" />
           <Carousel />
         </article>
 
         <article>
-
+          <div>
+            <header>
+              <ul>
+                <li><h2>Front-End</h2></li>
+                <li><h2>Back-End</h2></li>
+                <li><h2>Habilidades</h2></li>
+              </ul>
+            </header>
+          </div>
         </article>
 
       </main>
