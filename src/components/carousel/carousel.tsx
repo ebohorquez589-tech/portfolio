@@ -95,7 +95,7 @@ const ProjectCarousel: React.FC = () => {
 
     const interval = window.setInterval(() => {
       setCurrentIndex((prev) => (prev >= projects.length - 1 ? 0 : prev + 1));
-    }, 6000);
+    }, 8000);
 
     return () => clearInterval(interval);
   }, [isAutoPlaying, isVisible, projects.length]);
@@ -126,7 +126,7 @@ const ProjectCarousel: React.FC = () => {
     
     // Pausar auto-play temporalmente después de interacción
     setIsAutoPlaying(false);
-    setTimeout(() => setIsAutoPlaying(true), 6000);
+    setTimeout(() => setIsAutoPlaying(true), 8000);
   };
 
   return (
@@ -149,7 +149,7 @@ const ProjectCarousel: React.FC = () => {
         {/* Contenedor principal del carousel */}
         <div className="overflow-hidden rounded-2xl">
           <div
-            className="flex transition-transform duration-700 ease-out gap-4 sm:gap-6 lg:gap-8 py-4"
+            className="flex transition-transform duration-500 ease-out gap-4 sm:gap-6 lg:gap-8 py-4"
             style={{ 
               transform: `translateX(-${currentIndex * (100 / slidesToShow)}%)`,
               willChange: 'transform'

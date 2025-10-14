@@ -63,7 +63,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
       </div>
 
       {/* Contenido visible por defecto */}
-      <div className="p-4 sm:p-5 lg:p-6 lg:group-hover:opacity-0 transition-opacity duration-300">
+      <div className="p-4 sm:p-5 lg:p-6 lg:group-hover:opacity-0 transition-opacity ">
         <h3 className="text-lg sm:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
           {project.title}
         </h3>
@@ -90,10 +90,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
       {/* Overlay completo que aparece en hover (solo desktop) */}
       <div className="hidden lg:flex absolute inset-0 bg-gradient-to-br from-indigo-900/95 via-indigo-900/0 to-indigo-900/95 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-500 flex-col justify-center items-center p-6 xl:p-8">
         <div className="text-center">
-          <h3 className="text-2xl xl:text-3xl font-bold mb-3 xl:mb-4 bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent">
+          <h3 className="text-2xl xl:text-3xl font-bold mb-3 xl:mb-4 bg-gradient-to-r text-white bg-clip-text text-transparent">
             {project.title}
           </h3>
-          <p className="text-slate-200 mb-4 xl:mb-6 leading-relaxed text-sm xl:text-base max-w-sm">
+          <p className="text-slate-100 font-medium mb-4 xl:mb-6 leading-relaxed text-sm xl:text-base max-w-sm">
             {project.description}
           </p>
 
