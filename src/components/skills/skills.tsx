@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { FaHtml5 } from "react-icons/fa";
+
 
 // Define a type for the possible active skills to ensure type safety
 type SkillCategory = 'Front-End' | 'Back-End' | 'Herramientas' | 'Habilidades';
@@ -76,6 +78,21 @@ const Skill: React.FC = () => {
           </li>
         </ul>
       </header>
+      <main>
+        <section className="w-[95%] m-auto">
+            <ul>
+              <li>
+                <FaHtml5 />
+                <div>
+                <h3>
+                  HTML
+                </h3>
+                <p>Avanzado</p>
+                </div>
+              </li>
+            </ul>  
+        </section>
+      </main>
     </div>
   );
 };

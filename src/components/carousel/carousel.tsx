@@ -71,6 +71,7 @@ const ProjectCarousel: React.FC = () => {
     }
   ];
 
+const singleProject = projects.find(p => p.id === 1);
   // Detectar tamaño de pantalla para slides responsivos
   useEffect(() => {
     const handleResize = () => {
@@ -79,8 +80,10 @@ const ProjectCarousel: React.FC = () => {
         setSlidesToShow(1);
       } else if (width < 1024) {
         setSlidesToShow(2);
-      } else {
+      } else if (width < 1536) {
         setSlidesToShow(3);
+      } else {
+        setSlidesToShow(4);
       }
     };
 
@@ -132,7 +135,7 @@ const ProjectCarousel: React.FC = () => {
   return (
     <div
       ref={carouselRef}
-      className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8"
+      className="w-full max-w-[105rem] mx-auto px-4 sm:px-6 lg:px-8 my-8"
       onMouseEnter={() => setIsAutoPlaying(false)}
       onMouseLeave={() => setIsAutoPlaying(true)}
     >
@@ -161,7 +164,8 @@ const ProjectCarousel: React.FC = () => {
                 className={`flex-shrink-0 group ${
                   slidesToShow === 1 ? 'w-full' : 
                   slidesToShow === 2 ? 'w-1/2' : 
-                  'w-1/3'
+                  slidesToShow === 3 ? 'w-1/3' :
+                  'w-1/4'
                 }`}
                 style={{ flexBasis: `${100 / slidesToShow}%` }}
               >
@@ -195,6 +199,7 @@ const ProjectCarousel: React.FC = () => {
           />
         ))}
       </div>
+
     </div>
   );
 };
