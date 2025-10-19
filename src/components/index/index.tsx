@@ -1,11 +1,12 @@
 
 import { FaDownload, FaLaptopCode } from "react-icons/fa";
-import Carousel from "../carousel/carousel"; 
+import Carousel from "../carousel/carousel";
+import Skill from "../skills/skills";
 
 export default function Home() {
   return (
     <div className=" text-white">
-      
+
       <header className="w-full h-screen flex items-center">
         <article className="w-[95%] m-auto ">
           <div className="flex gap-20 items-center w-[80%] m-auto">
@@ -32,22 +33,14 @@ export default function Home() {
 
       <main>
 
-        <article className="m-auto w-[95%]  mb-[50px]">
+        <article id="Carousel" className="m-auto w-[95%]  mb-[50px]">
           <h2 className="text-white font-bold text-center text-3xl">Proyectos destacados</h2>
           <hr className="w-24 border-t-4 shadow-[0_0_20px_#8e44ad] border-purple-600 mx-auto mt-2" />
           <Carousel />
         </article>
 
-        <article>
-          <div>
-            <header>
-              <ul>
-                <li><h2>Front-End</h2></li>
-                <li><h2>Back-End</h2></li>
-                <li><h2>Habilidades</h2></li>
-              </ul>
-            </header>
-          </div>
+        <article className="m-auto w-[95%] mb-[50px]">
+          <Skill/>
         </article>
 
       </main>
