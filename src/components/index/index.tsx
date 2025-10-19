@@ -11,7 +11,7 @@ export default function Home() {
         <article className="w-[95%] m-auto ">
           <div className="flex gap-20 items-center w-[80%] m-auto">
             <div className="w-[450px] h-[450px] bg-violet-950 rounded-full border-4 border-purple-600 shadow-[0_0_20px_#8e44ad] flex justify-center items-center  ">
-              <img src="eduardo.png" alt="" className="bottom-15 relative w-[400px]  " />
+              <img src="eduardo.webp" alt="" className="bottom-15 relative w-[400px]  " />
             </div>
             <div className="flex flex-col gap-2">
 
